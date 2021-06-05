@@ -7,12 +7,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
+                            <span>Muslimah Fashion</span>
+                            <h1>Idul Fitri</h1>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                Meriahkan Hari Raya Idul Fitri Kamu Dengan Pakaian Terbaik Dari Adi Store !
                             </p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <a href="#" class="primary-btn">Belanja Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -21,26 +21,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
+                            <span>Muslimah Fashion</span>
+                            <h1>Idul Fitri</h1>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                Meriahkan Hari Raya Idul Fitri Kamu Dengan Pakaian Terbaik Dari Adi Store !
                             </p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <a href="#" class="primary-btn">Belanja Sekarang</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="single-hero-items set-bg" style="background-image: url('img/banner-3.jpg')">
+            <div class="single-hero-items set-bg" style="background-image: url('img/hero-3.jpg')">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
+                            <span>Muslimah Fashion</span>
+                            <h1>Idul Fitri</h1>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                Meriahkan Hari Raya Idul Fitri Kamu Dengan Pakaian Terbaik Dari Adi Store !
                             </p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <a href="#" class="primary-btn">Belanja Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -53,10 +53,17 @@
 
 <script>
 import carousel from 'vue-owl-carousel'
+import eventBus from '../EventBus'
+
 export default {
     name: 'CarouselBanner',
     components: {
         carousel
+    },
+    mounted() {
+        eventBus.$on ('back_home', () => {
+
+        })
     }
 }
 </script>

@@ -9,7 +9,7 @@
             <p class="mt-2">
                 Silakan tunggu update terbaru dari kami via email yang sudah Anda daftarkan sebelumnya.
             </p>
-            <router-link to="/" class="primary-btn pd-cart mt-3">Back to Home</router-link>
+            <a @click="clearStorage()" href="#/" class="primary-btn pd-cart mt-3">Back to Home</a>
         </div>
     </div>
     </div>
@@ -20,6 +20,18 @@ export default {
     name: "Sukses",
     components: {
         
+    },
+    data() {
+        return {
+          productCheckout: [],
+        }
+    },
+    methods: {
+        clearStorage(clear) {
+            this.productCheckout.splice(clear);
+            const parsed = JSON.stringify(this.productCheckout);
+            localStorage.setItem('productCheckout', parsed)
+        }
     }
 }
 </script>

@@ -3,8 +3,8 @@
     <Header />
     <CarouselBanner />
     <CarouselItems />
-    <InstaSection />
     <PartnerLogo />
+    <ArticleSection />
     <Footer />
   </div>
 </template>
@@ -13,7 +13,7 @@
 import Header from '../components/Header'
 import CarouselBanner from '../components/CarouselBanner'
 import CarouselItems from '../components/CarouselItems'
-import InstaSection from '../components/InstaSection'
+import ArticleSection from '../components/ArticleSection'
 import PartnerLogo from '../components/PartnerLogo'
 import Footer from '../components/Footer'
 
@@ -23,7 +23,7 @@ export default {
     Header,
     CarouselBanner,
     CarouselItems,
-    InstaSection,
+    ArticleSection,
     PartnerLogo,
     Footer
   }

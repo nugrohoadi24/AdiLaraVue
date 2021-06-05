@@ -1,97 +1,116 @@
 <template>
     <!-- Header Section Begin -->
     <header class="header-section">
-        <div class="header-top">
-            <div class="container">
-                <div class="ht-left">
-                    <div class="mail-service">
-                        <i class=" fa fa-envelope"></i> hello.shayna@gmail.com
-                    </div>
-                    <div class="phone-service">
-                        <i class=" fa fa-phone"></i> +628 22081996
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
+        <nav class="navbar">
             <div class="inner-header">
-                <div class="row">
-                    <div class="col-lg-2 col-md-2">
-                        <div class="logo">
-                            <router-link to="/">
-                                <img src="img/logo_website_shayna.png" alt="" />
-                            </router-link>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7"></div>
-                    <div class="col-lg-3 text-right col-md-3">
-                        <ul class="nav-right">
-                            <li class="cart-icon">
-                                Keranjang Belanja &nbsp;
-                                <a href="#">
-                                    <i class="icon_bag_alt"></i>
-                                    <span>3</span>
-                                </a>
-                                <div class="cart-hover">
-                                    <div class="select-items">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="si-pic">
-                                                        <img src="img/select-product-1.jpg" alt="" />
-                                                    </td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="si-pic">
-                                                        <img src="img/select-product-2.jpg" alt="" />
-                                                    </td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p>$60.00 x 1</p>
-                                                            <h6>Kabino Bedside Table</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="select-total">
-                                        <span>total:</span>
-                                        <h5>$120.00</h5>
-                                    </div>
-                                    <div class="select-button">
-                                        <router-link to="/cart" class="primary-btn view-card">VIEW CARD</router-link>
-                                        <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
-                                    </div>
+                <a @click="backHome()" href="">
+                    <img class="logo" src="img/adi-store.png" alt="adi-store">
+                </a>
+                <ul class="nav-right text-right">
+                        <li class="cart-icon">
+                            Keranjang &nbsp;
+                            <a href="#">
+                                <i class="icon_bag_alt"></i>
+                                <span>{{ productCheckout.length }}</span>
+                            </a>
+                            <div class="cart-hover">
+                                <div class="select-items">
+                                    <table>
+                                        <tbody v-if="productCheckout.length > 0">
+                                            <tr v-for="checkout in productCheckout" v-bind:key="checkout.id">
+                                                <td class="si-pic">
+                                                    <img class="photo-checkout" :src="checkout.photo" alt="" />
+                                                </td>
+                                                <td class="si-text">
+                                                    <div class="product-selected">
+                                                        <p>Rp. {{ checkout.price }}</p>
+                                                        <h6>{{ checkout.name }}</h6>
+                                                    </div>
+                                                </td>
+                                                <td @click="removeItem(checkout.id)" class="si-close">
+                                                    <i class="ti-close"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody v-else>
+                                            <tr>
+                                                <td><h5>Keranjang Masih Kosong</h5></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
+                                <div class="select-total">
+                                    <span>total:</span>
+                                    <h5>Rp. {{ subtotalPrice }}</h5>
+                                </div>
+                                <div class="select-button">
+                                    <router-link to="/cart" class="primary-btn view-card">CHECK OUT</router-link>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
                 </div>
-            </div>
-        </div>
+        </nav>
     </header>
     <!-- Header End -->
 </template>
 
 <script>
+import eventBus from '../EventBus'
+
 export default {
-    name: 'Header'
+    name: 'Header',
+    data() {
+      return {
+          productCheckout: [],
+      }
+    },
+    methods: {
+        backHome() {
+            eventBus.$emit('back_home')
+        },
+        removeItem(idItemStorage) {
+            let cheackoutUserStorage = JSON.parse(localStorage.getItem("productCheckout"));
+            let itemCheckoutUserStorage = cheackoutUserStorage.map(itemCheckoutUserStorage => itemCheckoutUserStorage.id);
+            let index = itemCheckoutUserStorage.findIndex(id => id == idItemStorage);
+            this.productCheckout.splice(index, 1);
+            
+            const parsed = JSON.stringify(this.productCheckout);
+            localStorage.setItem('productCheckout', parsed);
+            
+            eventBus.$emit('change_cart')
+        }
+    },
+    mounted() {
+        eventBus.$on('change_cart', ()=> {
+            this.productCheckout = JSON.parse(localStorage.getItem('productCheckout'));
+        })
+           
+        if (localStorage.getItem('productCheckout')) {
+            this.productCheckout = JSON.parse(localStorage.getItem('productCheckout'));
+        }
+    },
+    computed: {
+        subtotalPrice() {
+            return this.productCheckout.reduce(function(items, data){
+                return items + data.price;
+            }, 0);
+        }
+    }
 }
 </script>
 
 <style scoped>
+
+.photo-checkout {
+    width: 70px;
+    height: 100px;
+}
+
+.nav-right {
+    position: absolute;
+    display: inline-flex;
+    right: 10%;
+}
 
 </style>
