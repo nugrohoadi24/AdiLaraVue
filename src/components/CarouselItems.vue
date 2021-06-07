@@ -103,7 +103,7 @@ export default {
     },
     mounted() {
         axios
-            .get("http://localhost:8000/api/products")
+            .get("https://adminadistore.renklii.com/api/products")
             .then(res => (this.products = res.data.data.data))
             .catch(err => console.log(err));
 

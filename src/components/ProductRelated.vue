@@ -28,7 +28,7 @@
                                             <i class="icon_bag_alt"></i>
                                         </a>
                                     </li>
-                                    <li class="quick-view"><router-link v-bind:to="'/product/'+itemProduct.id">+ Quick View</router-link></li>
+                                    <li class="quick-view"><a @click="productRelated(itemProduct.id)">+ Quick View</a></li>
                                 </ul>
                             </div>
                             <div class="pi-text">
@@ -95,7 +95,7 @@ export default {
     },
     mounted() {
         axios
-            .get("http://localhost:8000/api/products")
+            .get("https://adminadistore.renklii.com/api/products")
             .then(res => (this.products = res.data.data.data))
             .catch(err => console.log(err));
 

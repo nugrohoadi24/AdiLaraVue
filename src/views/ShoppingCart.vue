@@ -157,7 +157,7 @@ export default {
             }
 
             axios
-            .post("http://localhost:8000/api/checkout", checkoutData)
+            .post("https://adminadistore.renklii.com/api/checkout", checkoutData)
             .this.$router.push('#/sukses')
             .catch(err => console.log(err));
         },

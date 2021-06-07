@@ -161,7 +161,7 @@ export default {
       },
       loadDetail(id) {
           axios
-            .get("http://localhost:8000/api/products", {
+            .get("https://adminadistore.renklii.com/api/products", {
                 params:{
                     id: id
                 }
