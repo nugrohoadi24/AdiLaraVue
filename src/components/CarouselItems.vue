@@ -30,7 +30,7 @@
                                     <h5>{{ itemProduct.name }}</h5>
                                 </router-link>
                                 <div class="product-price">
-                                    Rp. {{ itemProduct.price }}
+                                    Rp. {{ parseInt(itemProduct.price) }}
                                     <!-- <span>$35.00</span> -->
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ export default {
           var productStored = {
               "id": idProduct,
               "name": nameProduct,
-              "price": priceProduct,
+              "price": parseInt(priceProduct),
               "photo": photoProduct
           }
 

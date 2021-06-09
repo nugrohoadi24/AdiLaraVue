@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="select-total">
                                     <span>total:</span>
-                                    <h5>Rp. {{ subtotalPrice }}</h5>
+                                    <h5>Rp. {{ parseInt(subtotalPrice) }}</h5>
                                 </div>
                                 <div class="select-button">
                                     <router-link to="/cart" class="primary-btn view-card">CHECK OUT</router-link>
